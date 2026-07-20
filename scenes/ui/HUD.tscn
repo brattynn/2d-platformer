@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 260.0
+offset_bottom = 44.0
+min_value = 0.0
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="DeathLabel" type="Label" parent="."]
+visible = false
+offset_left = 340.0
+offset_top = 230.0
+offset_right = 620.0
+offset_bottom = 280.0
+text = "Orpheus has fallen..."
+horizontal_alignment = 1
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = 340.0
+offset_top = 20.0
+offset_right = 660.0
+offset_bottom = 44.0
+min_value = 0.0
+max_value = 200.0
+value = 200.0
+show_percentage = false
+
+[node name="BossLabel" type="Label" parent="."]
+visible = false
+offset_left = 340.0
+offset_top = 44.0
+offset_right = 660.0
+offset_bottom = 66.0
+text = "Charon"
+horizontal_alignment = 1
+
+[node name="VictoryLabel" type="Label" parent="."]
+visible = false
+offset_left = 340.0
+offset_top = 230.0
+offset_right = 620.0
+offset_bottom = 280.0
+text = "Charon defeated!"
+horizontal_alignment = 1

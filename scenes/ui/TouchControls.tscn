@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/touch_button.gd" id="1"]
+
+[node name="TouchControls" type="CanvasLayer"]
+
+[node name="MoveLeft" type="Button" parent="."]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -160.0
+offset_right = 90.0
+offset_bottom = -90.0
+text = "◀"
+script = ExtResource("1")
+action_name = "move_left"
+
+[node name="MoveRight" type="Button" parent="."]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -160.0
+offset_right = 170.0
+offset_bottom = -90.0
+text = "▶"
+script = ExtResource("1")
+action_name = "move_right"
+
+[node name="Jump" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -230.0
+offset_right = -100.0
+offset_bottom = -160.0
+text = "JUMP"
+script = ExtResource("1")
+action_name = "jump"
+
+[node name="Attack" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -160.0
+offset_right = -20.0
+offset_bottom = -90.0
+text = "ATK"
+script = ExtResource("1")
+action_name = "attack"
+
+[node name="Dodge" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -90.0
+offset_right = -100.0
+offset_bottom = -20.0
+text = "DODGE"
+script = ExtResource("1")
+action_name = "dodge"
