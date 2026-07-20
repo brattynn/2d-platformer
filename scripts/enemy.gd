@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 
 func _deal_contact_damage() -> void:
 	for body in contact_area.get_overlapping_bodies():
-		if body.is_in_group("player") and body.has_method("take_damage"):
+		if (body.is_in_group("player") or body.is_in_group("escort")) and body.has_method("take_damage"):
 			body.take_damage(contact_damage)
 
 func take_damage(amount: int) -> void:

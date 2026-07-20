@@ -52,3 +52,35 @@ offset_right = 620.0
 offset_bottom = 280.0
 text = "Charon defeated!"
 horizontal_alignment = 1
+
+[node name="EscortHealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = 700.0
+offset_top = 20.0
+offset_right = 940.0
+offset_bottom = 44.0
+min_value = 0.0
+max_value = 60.0
+value = 60.0
+show_percentage = false
+
+[node name="DoubtBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = 700.0
+offset_top = 48.0
+offset_right = 940.0
+offset_bottom = 66.0
+min_value = 0.0
+max_value = 100.0
+value = 0.0
+show_percentage = false
+
+[node name="EscortLostLabel" type="Label" parent="."]
+visible = false
+offset_left = 300.0
+offset_top = 230.0
+offset_right = 660.0
+offset_bottom = 300.0
+text = "You looked back too long...
+Eurydice is lost to the dark."
+horizontal_alignment = 1

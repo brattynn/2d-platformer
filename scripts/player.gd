@@ -33,6 +33,8 @@ var is_invulnerable: bool = false
 var already_hit: Array = []
 var knockback_time_left: float = 0.0
 var knockback_velocity_x: float = 0.0
+var external_speed_multiplier: float = 1.0
+var attack_locked: bool = false
 
 signal health_changed(current: int, max_health: int)
 signal died
@@ -69,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	elif is_attacking:
 		velocity.x = move_toward(velocity.x, 0, speed * 4 * delta)
 	else:
-		velocity.x = direction * speed
+		velocity.x = direction * speed * external_speed_multiplier
 
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not is_dodging:
 		velocity.y = jump_velocity
@@ -77,7 +79,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("jump") and velocity.y < 0.0:
 		velocity.y *= jump_cut_multiplier
 
-	if Input.is_action_just_pressed("attack") and can_attack and not is_dodging:
+	if Input.is_action_just_pressed("attack") and can_attack and not is_dodging and not attack_locked:
 		_start_attack()
 
 	if Input.is_action_just_pressed("dodge") and can_dodge and not is_attacking:
