@@ -31,6 +31,8 @@ var can_attack: bool = true
 var can_dodge: bool = true
 var is_invulnerable: bool = false
 var already_hit: Array = []
+var knockback_time_left: float = 0.0
+var knockback_velocity_x: float = 0.0
 
 signal health_changed(current: int, max_health: int)
 signal died
@@ -59,7 +61,10 @@ func _physics_process(delta: float) -> void:
 
 	attack_area.position.x = attack_offset * facing
 
-	if is_dodging:
+	if knockback_time_left > 0.0:
+		knockback_time_left -= delta
+		velocity.x = knockback_velocity_x
+	elif is_dodging:
 		velocity.x = dodge_speed * facing
 	elif is_attacking:
 		velocity.x = move_toward(velocity.x, 0, speed * 4 * delta)
@@ -111,6 +116,10 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy") and body.has_method("take_damage"):
 		body.take_damage(attack_damage)
 		already_hit.append(body)
+
+func apply_knockback(dir: float, force: float, duration: float = 0.18) -> void:
+	knockback_velocity_x = dir * force
+	knockback_time_left = duration
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:

@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/cerberus.gd" id="1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(90, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_contact"]
+size = Vector2(96, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bite"]
+size = Vector2(90, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lunge"]
+size = Vector2(100, 80)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_stomp"]
+radius = 80.0
+
+[node name="Cerberus" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1")
+max_health = 400
+contact_damage = 10
+speed = 60.0
+aggro_range = 560.0
+knockback_speed = 0.0
+attack_range = 110.0
+telegraph_duration = 0.5
+recover_duration = 0.6
+bite_range = 110.0
+lunge_range = 340.0
+stomp_range = 80.0
+bite_damage = 14
+lunge_damage = 18
+lunge_speed = 600.0
+stomp_damage = 20
+
+[node name="Sprite" type="Polygon2D" parent="."]
+color = Color(0.2, 0.1, 0.1, 1)
+polygon = PackedVector2Array(-45, -35, 45, -35, 45, 35, -45, 35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="ContactArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="ContactShape" type="CollisionShape2D" parent="ContactArea"]
+shape = SubResource("RectangleShape2D_contact")
+
+[node name="HitFlashTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ContactTimer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
+
+[node name="BiteArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BiteArea"]
+shape = SubResource("RectangleShape2D_bite")
+disabled = true
+
+[node name="BiteSprite" type="Polygon2D" parent="BiteArea"]
+visible = false
+color = Color(1, 0.4, 0.1, 0.85)
+polygon = PackedVector2Array(-45, -25, 45, -25, 45, 25, -45, 25)
+
+[node name="LungeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LungeArea"]
+shape = SubResource("RectangleShape2D_lunge")
+disabled = true
+
+[node name="LungeSprite" type="Polygon2D" parent="LungeArea"]
+visible = false
+color = Color(0.7, 0.2, 0.9, 0.6)
+polygon = PackedVector2Array(-50, -40, 50, -40, 50, 40, -50, 40)
+
+[node name="StompArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea"]
+shape = SubResource("CircleShape2D_stomp")
+disabled = true
+
+[node name="StompSprite" type="Polygon2D" parent="StompArea"]
+visible = false
+color = Color(1, 0.35, 0.1, 0.8)
+polygon = PackedVector2Array(80, 0, 56.6, 56.6, 0, 80, -56.6, 56.6, -80, 0, -56.6, -56.6, 0, -80, 56.6, -56.6)

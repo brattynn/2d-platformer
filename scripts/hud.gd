@@ -12,12 +12,15 @@ func bind_player(player: Node) -> void:
 	player.health_changed.connect(_on_health_changed)
 	player.died.connect(_on_player_died)
 
+var _current_boss_name: String = ""
+
 func bind_boss(boss: Node, boss_name: String = "") -> void:
 	boss_health_bar.max_value = boss.max_health
 	boss_health_bar.value = boss.health
 	boss_health_bar.visible = true
 	boss_label.text = boss_name
 	boss_label.visible = boss_name != ""
+	_current_boss_name = boss_name
 	boss.boss_health_changed.connect(_on_boss_health_changed)
 	boss.boss_defeated.connect(_on_boss_defeated)
 
@@ -32,6 +35,7 @@ func _on_boss_health_changed(current: int, max_health: int) -> void:
 func _on_boss_defeated() -> void:
 	boss_health_bar.visible = false
 	boss_label.visible = false
+	victory_label.text = "%s defeated!" % _current_boss_name if _current_boss_name != "" else "Boss defeated!"
 	victory_label.visible = true
 
 func _on_player_died() -> void:

@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 			if state_timer <= 0.0:
 				_enter_attack()
 		State.ATTACK:
-			velocity.x = 0.0
+			_process_attack(delta)
 			state_timer -= delta
 			if state_timer <= 0.0:
 				_enter_recover()
@@ -84,6 +84,10 @@ func _on_telegraph_start(_attack_name: String) -> void:
 # Override in subclasses; return the attack's active duration.
 func _perform_attack(_attack_name: String) -> float:
 	return 0.2
+
+# Override in subclasses that need to move during ATTACK (e.g. a dash).
+func _process_attack(_delta: float) -> void:
+	velocity.x = 0.0
 
 func take_damage(amount: int) -> void:
 	super.take_damage(amount)
